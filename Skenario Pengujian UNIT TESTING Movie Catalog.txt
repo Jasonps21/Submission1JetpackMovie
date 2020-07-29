@@ -1,0 +1,17 @@
+1. MovieViewModelTest:
+   -> Memuat Movie:
+	-> Memastikan data movie tidak null.
+	-> Memastikan jumlah data movie sesuai dengan yang diharapkan.
+
+2. TvshowViewModelTest:
+   -> Memuat Tv Show:
+	-> Memastikan data tv show tidak null.
+	-> Memastikan jumlah data tv show sesuai dengan yang diharapkan.
+
+3. DetailViewModelTest:
+   -> Memuat Detail Movie:
+	-> Memastikan data movie tidak null.
+	-> Memastikan data movie sesuai dengan yang diharapkan.
+   -> Memuat Actor:
+	-> Memastikan data actor tidak null.
+	-> Memastikan jumlah data actor sesuai dengan yang diharapkan.
