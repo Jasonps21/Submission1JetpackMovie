@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jason.movietvcatalog.R
+import com.jason.movietvcatalog.viewModel.ViewModelFactory
 import com.jason.movietvcatalog.`interface`.OnItemClickCallback
 import com.jason.movietvcatalog.ui.detail.DetailMovieActivity
-import com.jason.movietvcatalog.data.MovieEntity
+import com.jason.movietvcatalog.data.source.local.entity.MovieEntity
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
@@ -25,13 +27,15 @@ class MovieFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[MovieViewModel::class.java]
-            val movies = viewModel.getMovies()
+            val factory = ViewModelFactory.getInstance()
+            val viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
             val movieAdapter = MovieAdapter()
-            movieAdapter.setMovies(movies)
+            progress_bar.visibility = View.VISIBLE
+            viewModel.getMovies().observe(viewLifecycleOwner, Observer{ movies ->
+                progress_bar.visibility = View.GONE
+                movieAdapter.setMovies(movies)
+                movieAdapter.notifyDataSetChanged()
+            })
 
             movieAdapter.setOnItemClickCallback(object : OnItemClickCallback {
                 override fun onItemClicked(data: MovieEntity) {

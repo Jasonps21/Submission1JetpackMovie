@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jason.movietvcatalog.R
+import com.jason.movietvcatalog.viewModel.ViewModelFactory
 import com.jason.movietvcatalog.`interface`.OnItemClickCallback
-import com.jason.movietvcatalog.data.MovieEntity
+import com.jason.movietvcatalog.data.source.local.entity.MovieEntity
 import com.jason.movietvcatalog.ui.detail.DetailMovieActivity
 import kotlinx.android.synthetic.main.fragment_tvshow.*
+import kotlinx.android.synthetic.main.fragment_tvshow.progress_bar
 
 class TvshowFragment : Fragment() {
     override fun onCreateView(
@@ -25,10 +28,15 @@ class TvshowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvshowViewModel::class.java]
-            val tvshow = viewModel.getTvshow()
+            val factory = ViewModelFactory.getInstance()
+            val viewModel = ViewModelProvider(this, factory)[TvshowViewModel::class.java]
             val tvshowAdapter = TvshowAdapter()
-            tvshowAdapter.setTvshow(tvshow)
+            progress_bar.visibility = View.VISIBLE
+            viewModel.getTvshow().observe(viewLifecycleOwner, Observer{ tvshows ->
+                progress_bar.visibility = View.GONE
+                tvshowAdapter.setTvshow(tvshows)
+                tvshowAdapter.notifyDataSetChanged()
+            })
 
             tvshowAdapter.setOnItemClickCallback(object : OnItemClickCallback {
                 override fun onItemClicked(data: MovieEntity) {

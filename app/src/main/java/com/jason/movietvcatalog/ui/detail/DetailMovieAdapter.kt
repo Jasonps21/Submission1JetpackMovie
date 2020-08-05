@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.jason.movietvcatalog.R
-import com.jason.movietvcatalog.data.ActorEntity
+import com.jason.movietvcatalog.data.source.local.entity.ActorEntity
+import com.jason.movietvcatalog.data.source.remote.ApiClient
 import kotlinx.android.synthetic.main.items_actor.view.*
 
 class DetailMovieAdapter : RecyclerView.Adapter<DetailMovieAdapter.ActorViewHolder>() {
@@ -19,8 +22,14 @@ class DetailMovieAdapter : RecyclerView.Adapter<DetailMovieAdapter.ActorViewHold
     class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(actor: ActorEntity) {
             with(itemView) {
-                name_actor.text = actor.actor_name
-                name_player_actor.text = actor.actor_player
+                Glide.with(context)
+                    .load(ApiClient.BASE_URL_IMAGE + actor.profilePath)
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.people)
+                            .error(R.drawable.people))
+                    .into(profile_picture)
+                name_actor.text = actor.name
+                name_player_actor.text = actor.character
             }
         }
     }

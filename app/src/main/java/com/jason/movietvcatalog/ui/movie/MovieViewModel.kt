@@ -1,9 +1,10 @@
 package com.jason.movietvcatalog.ui.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.jason.movietvcatalog.data.MovieEntity
-import com.jason.movietvcatalog.utils.DataDummy
+import com.jason.movietvcatalog.data.source.local.entity.MovieEntity
+import com.jason.movietvcatalog.data.source.MovieRepository
 
-class MovieViewModel: ViewModel() {
-    fun getMovies(): List<MovieEntity> = DataDummy.generateDummyMovie()
+class MovieViewModel(private val movieRepository: MovieRepository): ViewModel() {
+    fun getMovies(): LiveData<List<MovieEntity>> = movieRepository.getAllMovies()
 }

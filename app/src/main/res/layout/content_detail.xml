@@ -11,6 +11,7 @@
     tools:showIn="@layout/activity_detail">
 
     <LinearLayout
+        android:id="@+id/layout_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:descendantFocusability="blocksDescendants"
@@ -97,14 +98,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/text_margin"
-                    android:text="@string/director"
+                    android:text="@string/status"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                 <TextView
-                    android:id="@+id/director"
+                    android:id="@+id/status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Jason" />
+                    tools:text="Release" />
 
             </LinearLayout>
         </RelativeLayout>

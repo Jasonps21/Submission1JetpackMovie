@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jason.movietvcatalog.R
 import com.jason.movietvcatalog.`interface`.OnItemClickCallback
-import com.jason.movietvcatalog.data.MovieEntity
+import com.jason.movietvcatalog.data.source.local.entity.MovieEntity
+import com.jason.movietvcatalog.data.source.remote.ApiClient
 import kotlinx.android.synthetic.main.items_movie.view.*
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
@@ -41,7 +42,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
         fun bind(movie: MovieEntity) {
             with(itemView) {
                 Glide.with(context)
-                    .load(movie.imagePath)
+                    .load(ApiClient.BASE_URL_IMAGE + movie.posterPath)
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_loading)
                         .error(R.drawable.ic_error))
