@@ -15,3 +15,13 @@
    -> Memuat Actor:
 	-> Memastikan data actor tidak null.
 	-> Memastikan jumlah data actor sesuai dengan yang diharapkan.
+
+4. FavoriteMovieViewModelTest:
+	-> Memuat Movie Favorite:
+	-> Memastikan data movie favorite tidak null.
+	-> Memastikan jumlah data movie favorite sesuai dengan yang diharapkan.
+
+5. FavoriteTvShowViewModelTest:
+ 	-> Memuat Tv Show Favorite:
+	-> Memastikan data tv show favorite tidak null.
+	-> Memastikan jumlah data tv show favorite sesuai dengan yang diharapkan.

@@ -21,7 +21,7 @@ class HomeActivityTest {
 
     private val dummyMovie = DataDummy.generateDummyMovie()
     private val dummyTvshow = DataDummy.generateDummyTVShow()
-    private val dummyActor = DataDummy.generateActorMovie(dummyMovie[0].id.toString())
+    private val dummyActor = DataDummy.generateActorMovie(dummyMovie[0].id)
 
     @get:Rule
     var activityRule = ActivityTestRule(HomeActivity::class.java)
@@ -98,9 +98,39 @@ class HomeActivityTest {
         )
     }
 
-    fun convertDuration(t: Int): String{
+    @Test
+    fun loadFavoriteMovie() {
+        onView(withId(R.id.rv_movies)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.fab)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(withId(R.id.action_favorite)).perform(click())
+        onView(withText(R.string.movie)).perform(click())
+        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movies)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.genre)).check(matches(isDisplayed()))
+        onView(withId(R.id.release_year)).check(matches(isDisplayed()))
+        onView(withId(R.id.duration)).check(matches(isDisplayed()))
+        onView(withId(R.id.status)).check(matches(isDisplayed()))
+        onView(withId(R.id.sinopsis)).check(matches(isDisplayed()))
+        onView(isRoot()).perform(ViewActions.pressBack())
+    }
+
+    fun convertDuration(t: Int): String {
         val hours: Int = t / 60
         val minutes: Int = t % 60
-        return if (t > 60) String.format("%dh %02dm", hours, minutes) else String.format("%02dm", minutes)
+        return if (t > 60) String.format("%dh %02dm", hours, minutes) else String.format(
+            "%02dm",
+            minutes
+        )
     }
 }

@@ -1,5 +1,7 @@
 package com.jason.movietvcatalog.data.source.remote
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.jason.movietvcatalog.data.source.remote.ApiClient.retrofitInstance
 import com.jason.movietvcatalog.data.source.remote.response.ActorResponse
 import com.jason.movietvcatalog.data.source.remote.response.MovieResponse
@@ -18,88 +20,88 @@ class RemoteDataSource private constructor() {
         }
     }
 
-    fun getAllMovies(callback: LoadMoviesCallback) {
+    fun getAllMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
+        val resultMovies = MutableLiveData<ApiResponse<List<MovieResponse>>>()
         GlobalScope.launch(Dispatchers.IO) {
             val service: ApiService = retrofitInstance!!.create<ApiService>(ApiService::class.java)
             val response = service.getMovies(ApiClient.API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()
-                callback.onAllMoviesReceived(data?.results)
+                if (data != null){
+                    resultMovies.postValue(ApiResponse.success(data.results))
+                }
                 EspressoIdlingResource.decrement()
             }
         }
+        return resultMovies
     }
 
-    fun getAllTvshows(callback: LoadTvshowCallback) {
+    fun getAllTvShows(): LiveData<ApiResponse<List<TvResponse>>> {
         EspressoIdlingResource.increment()
+        val resultTvShows = MutableLiveData<ApiResponse<List<TvResponse>>>()
         GlobalScope.launch(Dispatchers.IO) {
             val service: ApiService = retrofitInstance!!.create<ApiService>(ApiService::class.java)
             val response = service.getTvshows(ApiClient.API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()
-                callback.onAllTvshowReceived(data?.results)
+                if (data != null){
+                    resultTvShows.postValue(ApiResponse.success(data.results))
+                }
                 EspressoIdlingResource.decrement()
             }
         }
+        return resultTvShows
     }
 
-    fun getDetailMovie(movieId: Int, callback: LoadMovieDetailCallback) {
+    fun getDetailMovie(movieId: Int): LiveData<ApiResponse<MovieResponse>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<MovieResponse>>()
         GlobalScope.launch(Dispatchers.IO) {
             val service: ApiService = retrofitInstance!!.create<ApiService>(ApiService::class.java)
             val response = service.getMovieDetail(movieId, ApiClient.API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()
-                callback.onMovieDetailReceived(data)
+                if (data != null){
+                    resultMovie.postValue(ApiResponse.success(data))
+                }
                 EspressoIdlingResource.decrement()
             }
         }
+        return resultMovie
     }
 
-    fun getDetailTvshow(tvshowId: Int, callback: LoadTvshowDetailCallback) {
+    fun getDetailTvShow(tvshowId: Int): LiveData<ApiResponse<TvResponse>> {
         EspressoIdlingResource.increment()
+        val resultTvShow = MutableLiveData<ApiResponse<TvResponse>>()
         GlobalScope.launch(Dispatchers.IO) {
             val service: ApiService = retrofitInstance!!.create<ApiService>(ApiService::class.java)
             val response = service.getTvDetail(tvshowId, ApiClient.API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()
-                callback.onTvshowDetailReceived(data)
+                if (data != null){
+                    resultTvShow.postValue(ApiResponse.success(data))
+                }
                 EspressoIdlingResource.decrement()
             }
         }
+        return resultTvShow
     }
 
-    fun getMovieActor(movieId: Int, callback: LoadMovieActorsCallback) {
+    fun getMovieActor(movieId: Int): LiveData<ApiResponse<List<ActorResponse>>> {
         EspressoIdlingResource.increment()
+        val resultActors = MutableLiveData<ApiResponse<List<ActorResponse>>>()
         GlobalScope.launch(Dispatchers.IO) {
             val service: ApiService = retrofitInstance!!.create<ApiService>(ApiService::class.java)
             val response = service.getMovieCredits(movieId, ApiClient.API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()?.cast
-                callback.onAllMoviesActorReceived(data)
+                if (data != null){
+                    resultActors.postValue(ApiResponse.success(data))
+                }
                 EspressoIdlingResource.decrement()
             }
         }
-    }
-
-    interface LoadMoviesCallback {
-        fun onAllMoviesReceived(MovieResponse: List<MovieResponse>?)
-    }
-
-    interface LoadTvshowCallback {
-        fun onAllTvshowReceived(TvshowResponse: List<TvResponse>?)
-    }
-
-    interface LoadMovieActorsCallback {
-        fun onAllMoviesActorReceived(ActorResponse: List<ActorResponse>?)
-    }
-
-    interface LoadMovieDetailCallback {
-        fun onMovieDetailReceived(MovieResponse: MovieResponse?)
-    }
-
-    interface LoadTvshowDetailCallback {
-        fun onTvshowDetailReceived(TvshowResponse: TvResponse?)
+        return resultActors
     }
 }

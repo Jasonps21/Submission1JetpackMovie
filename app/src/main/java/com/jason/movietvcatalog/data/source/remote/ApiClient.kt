@@ -6,9 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     var retrofit: Retrofit? = null
-    const val BASE_URL = "http://api.themoviedb.org/3/"
-    const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w500/"
-    const val API_KEY = BuildConfig.GITHUB_TOKEN;
+    const val BASE_URL = BuildConfig.BASE_URL
+    const val BASE_URL_IMAGE = BuildConfig.BASE_URL_IMAGE
+    const val API_KEY = BuildConfig.GITHUB_TOKEN
     val retrofitInstance: Retrofit?
         get() {
             if (retrofit == null) {

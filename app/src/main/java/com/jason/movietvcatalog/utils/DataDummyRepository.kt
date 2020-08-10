@@ -9,23 +9,25 @@ object DataDummyRepository {
 
     fun generateDummyMovie(): List<MovieResponse> {
         val movies = ArrayList<MovieResponse>()
-        val genre1 = GenreResponse("35","Comedy")
-        val genre2 = GenreResponse("10749","Romance")
+        val genre1 = GenreResponse("18","Drama")
+        val genre2 = GenreResponse("14","Fantasy")
+        val genre3 = GenreResponse("27","Horror")
         val dataGenre = ArrayList<GenreResponse>()
         dataGenre.add(genre1)
         dataGenre.add(genre2)
+        dataGenre.add(genre3)
         movies.add(
             MovieResponse(
-                "583083",
-                "The Kissing Booth 2",
-                "/mb7wQv0adK3kjOUr9n93mANHhPJ.jpg",
-                "2020-07-24",
-                132,
+                "561",
+                "Constantine",
+                "/vPYgvd2MwHlxTamAOjwVQp4qs1W.jpg",
+                "2005-02-08",
+                121,
                 "Released",
                 0.toFloat(),
                 dataGenre,
-                "With college decisions looming, Elle juggles her long-distance romance with Noah, changing relationship with bestie Lee and feelings for a new classmate.",
-                "/wO5QSWZPBT71gMLvrRex0bVc0V9.jpg"
+                "John Constantine has literally been to Hell and back. When he teams up with a policewoman to solve the mysterious suicide of her twin sister, their investigation takes them through the world of demons and angels that exists beneath the landscape of contemporary Los Angeles.",
+                "/tIG8FwHRiHLOlWJdizp2oxdkSL2.jpg"
             )
         )
         movies.add(

@@ -2,18 +2,29 @@ package com.jason.movietvcatalog.data.source.remote.response
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
+    @SerializedName("id")
     var id: String?,
+    @SerializedName("title")
     var title: String?,
-    var poster_path: String?,
-    var release_date: String?,
+    @SerializedName("poster_path")
+    var posterPath: String?,
+    @SerializedName("release_date")
+    var releaseDate: String?,
+    @SerializedName("runtime")
     var runtime: Int?,
+    @SerializedName("status")
     var status: String?,
-    var vote_average: Float?,
+    @SerializedName("vote_average")
+    var voteAverage: Float?,
+    @SerializedName("genres")
     var genres: List<GenreResponse>?,
+    @SerializedName("overview")
     var overview: String?,
-    var backdrop_path: String?
+    @SerializedName("backdrop_path")
+    var backdropPath: String?
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -34,13 +45,13 @@ data class MovieResponse(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(title)
-        parcel.writeString(poster_path)
-        parcel.writeString(release_date)
+        parcel.writeString(posterPath)
+        parcel.writeString(releaseDate)
         parcel.writeValue(runtime)
         parcel.writeString(status)
-        parcel.writeValue(vote_average)
+        parcel.writeValue(voteAverage)
         parcel.writeString(overview)
-        parcel.writeString(backdrop_path)
+        parcel.writeString(backdropPath)
     }
 
     override fun describeContents(): Int {

@@ -1,6 +1,7 @@
 1. Menampilkan data Movie
 	-> Memastikan rv_movies dalam keadaan tampil.
 	-> Gulir rv_movies ke posisi data terakhir.
+
 2. Menampilkan data detail Movie
 	-> Memberi tindakan klik pada data pertama di rv_movies.
 	-> Memastikan Toolbar untuk name tampil sesuai dengan yang diharapkan.
@@ -9,12 +10,24 @@
 	-> Memastikan TextView untuk duration tampil sesuai dengan yang diharapkan.
 	-> Memastikan TextView untuk director tampil sesuai dengan yang diharapkan.
 	-> Memastikan TextView untuk sinopsis tampil sesuai dengan yang diharapkan.
+
 3. Menampilkan data Actor
 	-> Memberi tindakan klik pada data pertama di rv_movies.
 	-> Gulir content ke posisi terbawah.
 	-> Memastikan rv_actor dalam keadaan tampil.
 	-> Gulir rv_actor ke posisi data terakhir.
+
 4. Menampilkan data Tv Show
 	-> Klik TabLayout dengan teks TV Show
 	-> Memastikan rv_tvshow dalam keadaan tampil.
 	-> Gulir rv_tvshow ke posisi data terakhir.
+
+5. Ubah status movie menjadi favorite
+	-> Klik data pertama pada rv_movie
+	-> Klik tombol Favorite Movie
+	-> Keluar dari halaman detail
+	-> Klik icon Favorite di toolbar
+	-> Memastikan rv_movies dalam keadaan tampil.
+	-> Klik data pertama pada rv_movie yang ada di halaman favorite
+	-> memastikan data genre, release_year, duration, status, sinopsis tampil pada halaman detail favorite
+	-> keluar dari halaman favorite

@@ -24,3 +24,17 @@
    -> Memastikan metode di kelas repository terpanggil.
    -> Melakukan pengecekan data actor apakah null atau tidak.
    -> Melakukan pengecekan jumlah data actor apakah sudah sesuai atau belum.
+
+4. FavoriteMovieViewModelTest:
+   Memuat Movie:
+   -> Memanipulasi data ketika pemanggilan data movie favorite di kelas repository.
+   -> Memastikan metode di kelas repository terpanggil.
+   -> Melakukan pengecekan data movie favorite apakah null atau tidak.
+   -> Melakukan pengecekan jumlah data movie favorite apakah sudah sesuai atau belum.
+
+5. FavoriteTvshowViewModelTest:
+   Memuat Tv Show:
+   -> Memanipulasi data ketika pemanggilan data tv show favorite di kelas repository.
+   -> Memastikan metode di kelas repository terpanggil.
+   -> Melakukan pengecekan data tv show favorite apakah null atau tidak.
+   -> Melakukan pengecekan jumlah data tv show favorite apakah sudah sesuai atau belum.
